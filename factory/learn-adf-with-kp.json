@@ -1,0 +1,9 @@
+{
+	"name": "learn-adf-with-kp",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "abd2bff3-88db-4098-a6b0-3a3d0712437d",
+		"tenantId": "46aaa7c5-a410-415b-8e5d-af9d1729427a"
+	}
+}

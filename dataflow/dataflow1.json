@@ -22,6 +22,9 @@
 				},
 				{
 					"name": "splitVisa"
+				},
+				{
+					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
@@ -54,10 +57,13 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"select1 filter(customer_id=='12') ~> filter1",
+				"select1 filter(customer_id!='12') ~> filter1",
 				"filter1 split(payment=='visa',",
 				"     payment=='mastercard',",
-				"     disjoint: false) ~> splitVisa@(visa, mastercard, otherThanVisaAndMC)"
+				"     disjoint: false) ~> splitVisa@(visa, mastercard, otherThanVisaAndMC)",
+				"splitVisa@visa aggregate(groupBy(customer_id),",
+				"     max_product_id = max(product_id),",
+				"          min_product_id = min(product_id)) ~> aggregate1"
 			]
 		}
 	}

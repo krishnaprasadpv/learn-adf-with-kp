@@ -14,7 +14,11 @@
 			],
 			"sinks": [
 				{
-					"name": "WriteToFile"
+					"dataset": {
+						"referenceName": "CSV_Destination_2",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
 				}
 			],
 			"transformations": [
@@ -35,6 +39,9 @@
 				}
 			],
 			"scriptLines": [
+				"parameters{",
+				"     FileName as string (\"Testing\")",
+				"}",
 				"source(output(",
 				"          transaction_id as string,",
 				"          transactional_date as string,",
@@ -72,10 +79,27 @@
 				"     max_product_id = max(product_id),",
 				"          min_product_id = min(product_id)) ~> aggregate1",
 				"splitVisa@otherThanVisaAndMC derive(payment = coalesce(payment,'N/A')) ~> PaymnetNullsAsNA",
-				"aggregate1 sink(allowSchemaDrift: true,",
+				"PaymnetNullsAsNA sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          transaction_id as string,",
+				"          transactional_date as string,",
+				"          product_id as string,",
+				"          customer_id as string,",
+				"          payment as string,",
+				"          credit_card as string,",
+				"          loyalty_card as string,",
+				"          cost as string,",
+				"          quantity as string,",
+				"          price as string",
+				"     ),",
+				"     partitionFileNames:[($FileName)],",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> WriteToFile"
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 1) ~> sink1"
 			]
 		}
 	}

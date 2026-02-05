@@ -12,7 +12,11 @@
 					"name": "ReportingCSVSource"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"name": "WriteToFile"
+				}
+			],
 			"transformations": [
 				{
 					"name": "select1"
@@ -25,6 +29,9 @@
 				},
 				{
 					"name": "aggregate1"
+				},
+				{
+					"name": "PaymnetNullsAsNA"
 				}
 			],
 			"scriptLines": [
@@ -63,7 +70,12 @@
 				"     disjoint: false) ~> splitVisa@(visa, mastercard, otherThanVisaAndMC)",
 				"splitVisa@visa aggregate(groupBy(customer_id),",
 				"     max_product_id = max(product_id),",
-				"          min_product_id = min(product_id)) ~> aggregate1"
+				"          min_product_id = min(product_id)) ~> aggregate1",
+				"splitVisa@otherThanVisaAndMC derive(payment = coalesce(payment,'N/A')) ~> PaymnetNullsAsNA",
+				"aggregate1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> WriteToFile"
 			]
 		}
 	}

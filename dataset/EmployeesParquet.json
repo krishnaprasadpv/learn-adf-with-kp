@@ -1,0 +1,19 @@
+{
+	"name": "EmployeesParquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ParquetStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "reporting"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}

@@ -79,7 +79,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"EmployeesParquetFileName": {
-								"value": "@concat('EmployeesParquet',pipeline().RunId)",
+								"value": "@concat('EmployeesParquet',pipeline().RunId, formatDateTime(utcNow(),'yyyymmdd'))",
 								"type": "Expression"
 							}
 						}

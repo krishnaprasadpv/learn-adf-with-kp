@@ -16,7 +16,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "@dataset().EmployeesParquetFileName",
+					"value": "@concat(dataset().EmployeesParquetFileName,'.parquet')",
 					"type": "Expression"
 				},
 				"fileSystem": "reporting"

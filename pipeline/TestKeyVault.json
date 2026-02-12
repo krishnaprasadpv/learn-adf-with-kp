@@ -32,6 +32,8 @@
 			{
 				"name": "Copy data1",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -79,12 +81,34 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"EmployeesParquetFileName": {
-								"value": "@concat('EmployeesParquet',pipeline().RunId, formatDateTime(utcNow(),'yyyymmdd'))",
+								"value": "@{concat('EmployeesParquet',pipeline().RunId, formatDateTime(utcNow(),'yyyymmdd'))}",
 								"type": "Expression"
 							}
 						}
 					}
 				]
+			},
+			{
+				"name": "Get Metadata1",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "Employees",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"structure"
+					]
+				}
 			}
 		],
 		"annotations": []

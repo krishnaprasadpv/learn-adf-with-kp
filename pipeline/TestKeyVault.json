@@ -76,7 +76,13 @@
 				"outputs": [
 					{
 						"referenceName": "EmployeesParquet",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"EmployeesParquetFileName": {
+								"value": "@concat('EmployeesParquet',pipeline().RunId)",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}

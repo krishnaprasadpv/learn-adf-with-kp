@@ -5,11 +5,20 @@
 			"referenceName": "ParquetStorage",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"EmployeesParquetFileName": {
+				"type": "String"
+			}
+		},
 		"annotations": [],
 		"type": "Parquet",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().EmployeesParquetFileName",
+					"type": "Expression"
+				},
 				"fileSystem": "reporting"
 			},
 			"compressionCodec": "snappy"

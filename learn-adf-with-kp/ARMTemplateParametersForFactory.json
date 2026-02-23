@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "learn-adf-with-kp"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"ParquetStorage_accountKey": {
+			"value": ""
+		},
+		"SnowflakeDE_PROD_CLONE_password": {
+			"value": ""
+		},
+		"AnshGithub_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://storageaccountforkp.dfs.core.windows.net/"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://sql-auth-2.vault.azure.net/"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"value": "learn-sql-with-kp.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"value": "sql-interview"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"value": "kp"
+		},
+		"ParquetStorage_properties_typeProperties_url": {
+			"value": "https://storageaccountforkp.dfs.core.windows.net/"
+		},
+		"SnowflakeDE_PROD_CLONE_properties_typeProperties_database": {
+			"value": "de_prod_clone"
+		}
+	}
+}
